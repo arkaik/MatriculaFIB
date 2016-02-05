@@ -1,6 +1,6 @@
 MatriculaFIB
 ============
-Chrome extension to make things easier for UPC-FIB students during the course enrollment days.
+Firefox extension, based on the Chrome original extension,  to make things easier for UPC-FIB students during the course enrollment days.
 
 ----
 ### Requirements
@@ -14,6 +14,9 @@ Chrome extension to make things easier for UPC-FIB students during the course en
  + [Toastr](https://github.com/CodeSeven/toastr)
  + [Chrome-Extension-Twitter-Bootstrap-3-Template](https://github.com/Ehesp/Chrome-Extension-Twitter-Bootstrap-3-Template)
 
-### Authors
+### Authors of the original Chrome extension
  + [Ricard Gascons](https://github.com/mindula/)
  + [ghastgar](https://github.com/ghastgar)
+
+### Author of the Firefox port
+ + [FALC](https://github.com/arkaik)
