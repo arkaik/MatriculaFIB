@@ -1,14 +1,14 @@
 MatriculaFIB
 ============
-Firefox extension, based on the Chrome original extension,  to make things easier for UPC-FIB students during the course enrollment days.
+Firefox-adapted extension, based on the Chrome original extension, to make things easier for UPC-FIB students during the course enrollment days.
 
 ----
 ### Requirements
- + A recent version of Chrome or Chromium.
+ + A recent version of Firefox.
 
 ### Installation
  + Download the extension from [here](https://goo.gl/6DDhBC).
- + If you prefer, download it from this repo and add it to Chrome as an unpacked extension.
+ + If you prefer, download it from this repo and add it to Firefox as an unpacked extension.
 
 ### External libraries used
  + [Toastr](https://github.com/CodeSeven/toastr)

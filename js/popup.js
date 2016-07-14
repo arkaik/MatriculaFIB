@@ -15,7 +15,7 @@ $(document).ready(function() {
   var justPressed = false;
 
   //Get all data and add it, if any, and update it to the latest results
-  chrome.storage.sync.get(null, function(items) {
+  chrome.storage.local.get(null, function(items) {
     var allKeys = Object.keys(items);
     if (!jQuery.isEmptyObject(items)) {
       $.each(items, function(j, item) {
@@ -101,7 +101,7 @@ $(document).ready(function() {
         toastr.error("L'assignatura " + assig + " o el seu grup són incorrectes o no s'ofereixen.");
       }
     }
-    chrome.storage.sync.set(save);
+    chrome.storage.local.set(save);
   }
 
   //Retrieve data from the webpage
@@ -195,7 +195,7 @@ $(document).ready(function() {
   $(document).on('click', 'button.delBtn', function () {
     var rowIndex = $(this).attr('row');
     $('#assig' + rowIndex).remove();
-    chrome.storage.sync.remove(rowIndex);
+    chrome.storage.local.remove(rowIndex);
     --numberOfAssigs;
     return false;
   });
