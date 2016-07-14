@@ -32,7 +32,7 @@ $(document).ready(function() {
         numberOfAssigs++;
       })
       retrieveData();
-      refreshTable();
+      //refreshTable();
     }
   });
 
@@ -40,6 +40,7 @@ $(document).ready(function() {
     html = html.trim();
     html = html.substring(html.search("{\"data\"")).trim();
     html = html.substring(0, html.search("]}]}") + "]}]}".length).trim();
+    html = html.trim();
     data = JSON.parse(html);
     return data;
   }
@@ -106,26 +107,27 @@ $(document).ready(function() {
 
   //Retrieve data from the webpage
   function retrieveData() {
-    var xhr = new XMLHttpRequest();
-    var url2 = "http://www.fib.upc.edu/fib/estudiar-enginyeria-informatica/matricula/lliures/lliuresGRAU.html";
-    var url1 = "http://www.fib.upc.edu/fib/estudiar-enginyeria-informatica/matricula/lliures/lliuresFS.html";
-    var assigs1, assigs2;
-    xhr.open("GET", url1, false);
-    xhr.onreadystatechange = function() {
-      //console.log("mida resposta: " + xhr.responseText.length);
-      assigs1 = buildDataJSON(xhr.responseText);
-      //console.log(assigs1);
-    };
-    xhr.send();
-    xhr.open("GET", url2, false);
-    xhr.onreadystatechange = function() {
-      //console.log("mida resposta: " + xhr.responseText.length);
-      assigs2 = buildDataJSON(xhr.responseText);
-      //console.log(assigs2);
-    };
-    xhr.send();
-    assigs = assigs1["assigs"].concat(assigs2["assigs"]);
-    //console.log(assigs);
+      let requestsDone = 0;
+      let url1 = "http://www.fib.upc.edu/fib/estudiar-enginyeria-informatica/matricula/lliures/lliuresFS.html";
+      let url2 = "http://www.fib.upc.edu/fib/estudiar-enginyeria-informatica/matricula/lliures/lliuresGRAU.html";
+      var assigs1, assigs2;
+      $(document).on('ajaxDone', function () {
+          assigs = assigs1["assigs"].concat(assigs2["assigs"]);
+          refreshTable();
+      });
+
+      let req1 = $.get(url1, function(data) {
+          assigs1 = buildDataJSON(data);
+          requestsDone += 1;
+          if (requestsDone == 2) $(document).trigger('ajaxDone');
+      });
+
+      let req2 = $.get(url2, function(data) {
+          assigs2 = buildDataJSON(data);
+          requestsDone += 1;
+          if (requestsDone == 2) $(document).trigger('ajaxDone');
+      });
+
   }
 
   //Called each time we add a new alement to the table
@@ -149,7 +151,7 @@ $(document).ready(function() {
     } else {
       retrieveData();
       updateHTML(inputVal, grupVal);
-      refreshTable();
+    //   refreshTable();
     }
     return true;
   }
